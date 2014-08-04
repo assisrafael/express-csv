@@ -1,1 +1,3 @@
-module.exports = require('./lib/express-csv');
+module.exports = function(express) {
+	return require('./lib/express-csv')(express);
+};

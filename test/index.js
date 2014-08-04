@@ -1,6 +1,6 @@
 var express = require('express')
   , request = require('superagent')
-  , csv = require('../')
+  , csv = require('../')(express)
   , app = express.createServer();
 
 app.get('/test/1', function(req, res) {
@@ -43,7 +43,7 @@ describe('express-csv', function() {
   it('should expose .preventCast', function() {
     csv.preventCast.should.be.a('boolean');
   });
-  
+
   it('should expose .ignoreNullOrUndefined', function() {
     csv.ignoreNullOrUndefined.should.be.a('boolean');
   });
@@ -122,7 +122,7 @@ describe('res.csv()', function() {
   });
 
   it('should response csv', function(done) {
-    request 
+    request
       .get('http://127.0.0.1:8383/test/1')
       .end(function(res) {
         res.text.should.equal('"a","b","c"\r\n"d","e","f"\r\n');
